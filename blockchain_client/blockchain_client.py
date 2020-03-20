@@ -26,6 +26,11 @@ def make_transaction():
     return render_template('./make_transaction.html')
 
 
+@app.route('/generate/transaction', methods=['POST'])
+def generate_transaction():
+    return ''
+
+
 @app.route('/view/transactions')
 def view_transaction():
     return render_template('./view_transactions.html')

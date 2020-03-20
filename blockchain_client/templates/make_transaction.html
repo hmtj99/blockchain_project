@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockChain Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/blockchain_client/static/vendor/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="/blockchain_client/static/vendor/FontAwesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/blockchain_client/static/css/custom.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href="#" class="navbar-brand">Blockchain Client</a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Wallet Generator</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/make/transaction" class="nav-link">Make Transaction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/view/transactions" class="nav-link">View Transactions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="card-body">
+                    <h4 class="card-title">Send Coins</h4>
+                    <p class="card-text">
+                        Enter the details and click on the button to send the coins
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container alert alert-secondary">
+        <form id="transaction_form">
+            <div class="row">
+                <label class="col-sm-2">Sender Public Key:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="sender_public_key" id="sender_public_key" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-sm-2">Sender Private Key:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="sender_private_key" id="sender_private_key" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-sm-2">Receiver's Public Key:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="receiver_public_key" id="receiver_public_key" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-sm-2">Amount:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="amount" id="amount" class="form-control">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <input type="button" name="generate_transaction" id="generate_transaction"
+                        class="btn btn-primary btn-lg" value="Send Coins">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+
+    <script src="/blockchain_client/static/vendor/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="/blockchain_client/static/vendor/DataTables/datatables.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#generate_transaction').click(function () {
+                $.ajax({
+                    url: "/generate/transaction",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $('#transaction_form').serialize(),
+
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    },
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
